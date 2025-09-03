@@ -2,6 +2,10 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { z, ZodError } from "zod";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 //test pwd for l.lawliet@gmail.com: sweettooth123
 
@@ -9,6 +13,13 @@ const schema = z.object({
     email: z.email().trim(),
     password: z.string().min(8).trim(),
 });
+
+function generateAccessToken(email: string): string{
+    const payload = {
+        "email":email
+    }
+    return jwt.sign(payload, process.env.TOKEN_SECRET, {expiresIn: '1800s'} );
+}
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -29,6 +40,14 @@ const authRoute = router.post("/", async (req, res) => {
             );
     
             if (registeredUser) {
+                const options = {
+                    maxAge: 20 * 60 * 1000, //expires in 20 minutes
+                    httpOnly: true,
+                    secure: true
+                }
+                const token = generateAccessToken(userData.email);
+                console.log(token);
+                res.cookie("SessionID", token, options);
                 res.status(200).json({ success: true, message: "login successful" });
             } else {
                 res.status(400).json({ success: false, error: "wrong password" });
