@@ -7,9 +7,9 @@ dotenv.config();
 
 //test pwd for l.lawliet@gmail.com: sweettooth123
 
-function generateAccessToken(email: string): string{
+function generateAccessToken(id: Number): string{
     const payload = {
-        "email":email
+        "id":id
     }
     return jwt.sign(payload, process.env.TOKEN_SECRET, {expiresIn: '1800s'} );
 }
@@ -37,7 +37,7 @@ const login = async (req, res)=>{
                         httpOnly: true,
                         secure: true
                     }
-                    const token = generateAccessToken(userData.email);
+                    const token = generateAccessToken(userData.id);
                     res.cookie("SessionID", token, options);
                     res.status(200).json({ success: true, message: "login successful" });
                 } else {
