@@ -1,15 +1,9 @@
-import {z, ZodError} from 'zod';
+import { ZodError, ZodObject } from "zod";
 
-const user = z.object({
-    name: z.string().min(3).max(20),
-    email: z.email().trim(),
-    password: z.string().min(8).trim()
-});
-
-export default async function inputValidation(req, res, next){
+const validate = (schema: ZodObject) => async (req, res, next)=>{
     try{
         const data = req.body;
-        req.validatedData = await user.parseAsync(data);
+        req.validatedData = await schema.parseAsync(data);
         next();
     }   
     catch (err){
@@ -23,3 +17,5 @@ export default async function inputValidation(req, res, next){
         }
     }
 }
+
+export default validate;
