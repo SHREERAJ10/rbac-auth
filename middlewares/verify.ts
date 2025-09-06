@@ -1,4 +1,3 @@
-//verify the access token
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import {PrismaClient} from '@prisma/client';
@@ -6,7 +5,7 @@ import {PrismaClient} from '@prisma/client';
 dotenv.config();
 const prisma = new PrismaClient();
 
-const verify = async (req, res, next)=>{
+export const verifyToken = async (req, res, next)=>{
     try{
         const cookie = req.headers["cookie"];
         const token = cookie.split("=")[1]; //get actual access token from req.header
@@ -30,4 +29,16 @@ const verify = async (req, res, next)=>{
     }
 }
 
-export default verify;
+export const verifyRole = async (req, res, next)=>{
+    try{
+        const role = req.user.role;
+        if(role==="admin"){
+            next();
+        }
+        res.status(403).json({"success":false,"error":"access denied!"});
+    }
+    catch (err){
+        console.log(err);
+        res.status(500).json({"success":false,"error":"server error!"});
+    }
+}
