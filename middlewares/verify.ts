@@ -16,8 +16,12 @@ export const verifyToken = async (req, res, next)=>{
             }
             const {id} = decoded;
             req.user = await prisma.user.findUnique({
+                select:{
+                    id:true,
+                    role:true
+                },
                 where:{
-                    id:id
+                        id:id
                 }
             });
             next();
@@ -35,7 +39,9 @@ export const verifyRole = async (req, res, next)=>{
         if(role==="admin"){
             next();
         }
-        res.status(403).json({"success":false,"error":"access denied!"});
+        else{
+            res.status(403).json({"success":false,"error":"access denied!"});
+        }
     }
     catch (err){
         console.log(err);
