@@ -19,8 +19,14 @@ export const verifyAccessToken =
         }
         const { id, type } = decoded;
 
+        const userExists = await prisma.user.findFirst({
+          where: {
+            id: id,
+          },
+        });
+
         //verify tokenType
-        if (type === "ACCESS") {
+        if (type === "ACCESS" && userExists != null) {
           req.id = id;
           next();
         }
@@ -31,33 +37,37 @@ export const verifyAccessToken =
     }
   };
 
-export const verifyRefreshToken = (secretKey:string) =>async (req, res, next) =>{
-    try{
-        const refreshToken = req.cookies.RefreshToken;
-        jwt.verify(refreshToken, secretKey, (err, decoded)=>{
-            if (err) {
-              console.log(err);
-              res.status(401).json({ success: false, error: "Invalid token" });
-            }
-            const { id, tokenType } = decoded;            
-    
-            //verify tokenType
-            if (tokenType === "REFRESH") {
-              req.id = id;
-              next();
-            }
+export const verifyRefreshToken =
+  (secretKey: string) => async (req, res, next) => {
+    try {
+      const refreshToken = req.cookies.RefreshToken;
+      jwt.verify(refreshToken, secretKey,async (err, decoded) => {
+        if (err) {
+          console.log(err);
+          res.status(401).json({ success: false, error: "Invalid token" });
+        }
+        const { id, tokenType } = decoded;
+
+        const userExists = await prisma.user.findFirst({
+          where: {
+            id: id,
+          },
         });
 
-    }
-    catch (err) {
+        //verify tokenType
+        if (tokenType === "REFRESH" && userExists!=null) {
+          req.id = id;
+          next();
+        }
+      });
+    } catch (err) {
       console.log(err);
       res.status(500).json({ success: false, error: "server error!" });
     }
-}
+  };
 
 export const verifyRole = async (req, res, next) => {
   try {
-    console.log(req.id);
     const userRole = await prisma.user.findUnique({
       select: {
         role: true,
@@ -68,12 +78,10 @@ export const verifyRole = async (req, res, next) => {
     });
     if (userRole["role"] === "admin") {
       next();
-    } 
-    else {
+    } else {
       res.status(403).json({ success: false, error: "access denied!" });
     }
-  } 
-  catch (err) {
+  } catch (err) {
     console.log(err);
     res.status(500).json({ success: false, error: "server error!" });
   }
