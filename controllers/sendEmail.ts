@@ -9,7 +9,7 @@ const sendVerificationEmail = async (req, res)=>{
     try{
         const userId = req.id;
         const testAccount = await nodemailer.createTestAccount();
-        const url = "http://"+req.get('host')+"/verify/email/verifyToken?token="+req.verificationToken;
+        const url = "http://"+req.get('host')+"/verify/email/token?token="+req.verificationToken;
 
         const emailToBeVerified = (await prisma.user.findFirst({
             where:{
