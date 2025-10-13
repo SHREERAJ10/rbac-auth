@@ -12,7 +12,7 @@ const router = express.Router();
 
 const emailRoute = router.post('/', verifyAccessToken(process.env.TOKEN_SECRET), checkEmailAlreadyVerified, emailVerificationStuff, sendEmail);
 
-router.get('/verifyToken', verifyAccessToken(process.env.TOKEN_SECRET), verifyEmailToken);
+router.get('/token', verifyAccessToken(process.env.TOKEN_SECRET), verifyEmailToken);
 
 
 export default emailRoute;
