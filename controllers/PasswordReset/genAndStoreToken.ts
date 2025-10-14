@@ -7,10 +7,12 @@ const genAndStoreToken = async (req, res, next)=>{
 
     try{
 
-        const tokenExpiresInMins = 5;
+        const tokenExpiresInMins = 10;
     
         //generate token
         const resetToken = crypto.randomBytes(64).toString('hex');
+
+        const selector = crypto.randomBytes(16).toString('hex');
         
         //hash the token
         const tokenHash = crypto.createHash('sha256').update(resetToken).digest('hex');
@@ -26,6 +28,7 @@ const genAndStoreToken = async (req, res, next)=>{
             await prisma.passwordReset.create({
                 data:{
                     userId: userId,
+                    selector:selector,
                     reset_token_hash: tokenHash,
                     token_created_at: new Date(),
                     token_expires_at: new Date(Date.now() + tokenExpiresInMins *60 * 1000), //expiry time in ms
@@ -45,6 +48,7 @@ const genAndStoreToken = async (req, res, next)=>{
             });
         }
         req.resetToken = resetToken;
+        req.selector = selector;
         next();
     }
     catch (err){
