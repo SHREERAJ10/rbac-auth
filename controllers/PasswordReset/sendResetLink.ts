@@ -7,7 +7,7 @@ const sendResetLink = async (req, res, next)=>{
     try{
             const userId = req.id;
             const testAccount = await nodemailer.createTestAccount();
-            const url = "http://"+req.get('host')+"/reset/password/token?selector="+req.selector+"?token="+req.resetToken;
+            const url = "http://"+req.get('host')+"/reset/password/token?selector="+req.selector+"&token="+req.resetToken;
     
             const userEmail = (await prisma.user.findFirst({
                 where:{
