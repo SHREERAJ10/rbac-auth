@@ -3,7 +3,6 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,9 +12,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//Note: prisma converts model name to camelCase after npx prisma generate
+
 model User{
   id Int @id @default(autoincrement())
+  role String @default("user")
   name String
   email String @unique
   password String
+  refreshTokenHash String @default("")
+  email_verification EmailVerification?
+  password_reset PasswordReset?
+}
+
+model EmailVerification{
+  user User @relation(fields:[userId], references:[id])
+  userId Int @id
+  email_verified Boolean @default(false)
+  verification_token_hash String
+  token_created_at DateTime
+  token_expires_at DateTime
+  token_used_at DateTime?
+}
+
+model PasswordReset{
+  user User @relation(fields:[userId], references:[id])
+  userId Int @id
+  selector String
+  reset_token_hash String
+  token_created_at DateTime
+  token_expires_at DateTime
+  token_used_at DateTime?
 }

@@ -34,11 +34,11 @@ const sendResetLink = async (req, res, next)=>{
             subject: "Hello",
             text: `Click here to reset your password: ${url}`, // plain‑text body
             html: `<a href=${url}>Reset Password</a>
-                    <p>${url}</p>`, // HTML body
+                    <p>Send <b>POST</b> request to this from Postman with your new password: <br> <br> ${url}</p>`, // HTML body
           });
         
           console.log(nodemailer.getTestMessageUrl(info));
-          res.status(200).json({"success":true, "message":"reset link has been sent"});
+          res.status(200).json({"success":true, "message":"reset link has been sent to the provided email."});
         }
         catch (err){
             console.log(err);

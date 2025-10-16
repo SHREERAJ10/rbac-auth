@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import {verifyAccessToken, verifyRole} from '../middlewares/verify';
+import {verifyAccessToken, verifyRole} from '../../middlewares/verify';
 const router = express.Router();
 
 dotenv.config();

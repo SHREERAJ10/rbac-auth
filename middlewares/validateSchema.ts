@@ -1,9 +1,9 @@
 import { ZodError, ZodObject } from "zod";
 
-const validate = (schema: ZodObject) => async (req, res, next)=>{
+const validateSchema = (schema: ZodObject) => async (req, res, next)=>{
     try{
         const data = req.body;
-        req.validatedData = await schema.parseAsync(data);
+        req.validatedData = await schema.parseAsync(data); //note: we provide schema (input data pattern) as argument to this function
         next();
     }   
     catch (err){
@@ -18,4 +18,4 @@ const validate = (schema: ZodObject) => async (req, res, next)=>{
     }
 }
 
-export default validate;
+export default validateSchema;

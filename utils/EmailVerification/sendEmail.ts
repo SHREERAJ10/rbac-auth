@@ -35,8 +35,8 @@ const sendVerificationEmail = async (req, res)=>{
         to: "receiver@example.com",
         subject: "Hello",
         text: `Verify your email: ${url}`, // plain‑text body
-        html: `<a href=${url}>verify</a>
-                <p>${url}</p>`, // HTML body
+        html: `<a href=${url}>Verify</a>
+                <p>Send <b>GET</b> request to this from Postman: <br> <br> ${url}</p>`, // HTML body
       });
     
       console.log(nodemailer.getTestMessageUrl(info));

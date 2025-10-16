@@ -25,6 +25,8 @@ export const verifyAccessToken =
         }
         const { id, type } = decoded;
 
+
+        //check if user exists in user's table in DB
         const userExists = await prisma.user.findFirst({
           where: {
             id: id,

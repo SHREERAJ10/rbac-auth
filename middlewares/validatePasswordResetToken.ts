@@ -3,10 +3,11 @@ import crypto from 'crypto';
 
 const prisma = new PrismaClient();
 
-const validateToken = async (req, res, next)=>{
+const validatePasswordResetToken = async (req, res, next)=>{
 
     try{
         const selector = req.query.selector as string;
+        console.log(selector);
         const rawResetToken = req.query.token as string;
         const resetTokenHash = crypto.createHash('sha256').update(rawResetToken).digest('hex');
         
@@ -15,6 +16,7 @@ const validateToken = async (req, res, next)=>{
                 selector:selector
             }
         });
+        console.log(userData);
     
         const {userId, reset_token_hash, token_expires_at, token_used_at} = userData;
     
@@ -49,4 +51,4 @@ const validateToken = async (req, res, next)=>{
     }
 }
 
-export default validateToken;
+export default validatePasswordResetToken;

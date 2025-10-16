@@ -1,8 +1,8 @@
 import express from 'express';
-import { verifyRefreshToken } from '../middlewares/verify';
+import { verifyRefreshToken } from '../../middlewares/verify';
 import dotenv from 'dotenv';
-import logout from '../controllers/logout';
-import { resetTokens } from '../controllers/issueTokens';
+import logout from '../../controllers/Auth/logout';
+import { resetTokens } from '../../utils/auth/issueTokens';
 
 dotenv.config();
 
