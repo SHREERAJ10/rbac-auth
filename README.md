@@ -2,7 +2,7 @@
 
 **RBAC-Auth (Role-Based Access Control - Authentication & Authorization)** is a backend authentication and authorization system built with **Node.js**, **Express**, and **PostgreSQL (via Prisma ORM)**.
 
-It provides a structured foundation for user authentication, role-based access, and secure token management — ideal for small to medium-scale backend systems.
+It provides a structured foundation for user authentication, role-based access, and secure token management - ideal for small to medium-scale backend systems.
 
 ---
 
