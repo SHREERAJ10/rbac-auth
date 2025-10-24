@@ -25,7 +25,7 @@ It provides a structured foundation for user authentication, role-based access, 
 - 🔐 **JWT-based authentication** with refresh token rotation  
 - 🧂 **Password hashing** using bcrypt  
 - 🛡️ **Protected routes** using middleware  
-- 🧩 **Role-Based Access Control (RBAC)** – Admin and User roles  
+- 🧩 **Role-Based Access Control (RBAC)** - Admin and User roles  
 - 📧 **Email verification** flow (verification link via email)  
 - 🔑 **Forgot password** flow (reset link via email)  
 - 🚦 **Basic rate limiting** using express-rate-limit  
@@ -98,7 +98,7 @@ Use Postman to test the API endpoints:
 
 - Email verification and forgot password flows use **Ethereal Email**, a test SMTP service. A link is logged in the console which redirects to the ethereal mail in the browser where reset/verification link is received.  
 - Basic rate limiting is enabled to prevent brute-force attacks.  
-- The code is modular and organized into folders for routes, controllers, middleware, and utils — making it easier to maintain and extend.  
+- The code is modular and organized into folders for routes, controllers, middleware, and utils - making it easier to maintain and extend.  
 
 ---
 
