@@ -6,7 +6,7 @@ It provides a structured foundation for user authentication, role-based access, 
 
 ---
 
-## 🧠 Tech Stack
+## Tech Stack
 
 - **Node.js**
 - **Express.js**
@@ -20,20 +20,20 @@ It provides a structured foundation for user authentication, role-based access, 
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔐 **JWT-based authentication** with refresh token rotation  
-- 🧂 **Password hashing** using bcrypt  
-- 🛡️ **Protected routes** using middleware  
-- 🧩 **Role-Based Access Control (RBAC)** - Admin and User roles  
-- 📧 **Email verification** flow (verification link via email)  
-- 🔑 **Forgot password** flow (reset link via email)  
-- 🚦 **Basic rate limiting** using express-rate-limit  
-- 📁 **Well-structured and organized codebase** with modular folders and files  
+- **JWT-based authentication** with refresh token rotation  
+- **Password hashing** using bcrypt  
+- **Protected routes** using middleware  
+- **Role-Based Access Control (RBAC)** - Admin and User roles  
+- **Email verification** flow (verification link via email)  
+- **Forgot password** flow (reset link via email)  
+- **Basic rate limiting** using express-rate-limit  
+- **Well-structured and organized codebase** with modular folders and files  
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the repository
 ```bash
@@ -71,7 +71,7 @@ The server will start on **http://localhost:3000** by default.
 
 ---
 
-## 🧪 Testing with Postman
+## Testing with Postman
 
 Use Postman to test the API endpoints:
 
@@ -102,7 +102,7 @@ Use Postman to test the API endpoints:
 
 ---
 
-## 📘 Possible Improvements
+## Possible Improvements
 
 - Add centralized error handling middleware  
 - Add unit and integration tests (e.g., Jest / Vitest)  
@@ -112,12 +112,12 @@ Use Postman to test the API endpoints:
 
 ---
 
-## 🧑‍💻 Author
+## Author
 
 **Shreeraj Shrestha**  
 
 ---
 
-## ✅ License
+## License
 
 This project is open-source and available under the **MIT License**.
