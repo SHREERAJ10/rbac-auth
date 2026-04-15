@@ -94,7 +94,7 @@ Use Postman to test the API endpoints:
 
 ---
 
-## ⚙️ Notes
+## Notes
 
 - Email verification and forgot password flows use **Ethereal Email**, a test SMTP service. A link is logged in the console which redirects to the ethereal mail in the browser where reset/verification link is received.  
 - Basic rate limiting is enabled to prevent brute-force attacks.  
